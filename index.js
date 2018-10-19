@@ -6,11 +6,12 @@ const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const expressSession = require('express-session');
 const connectMongo = require('connect-mongo');
+const connectFlash = require('connect-flash');
 
 const app = new express();
-
 mongoose.connect('mongodb://localhost/node-blog');
 
+app.use(connectFlash());
 
 const mongoStore = connectMongo(expressSession)                             // Persistent session
 
