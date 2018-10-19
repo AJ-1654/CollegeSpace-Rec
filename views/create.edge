@@ -1,0 +1,73 @@
+@layout('layouts.app')
+
+
+@section('content')
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('/img/contact-bg.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>New Post</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+   
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+            <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+            <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+            <form name="NewPost" id="postForm" novalidate action="/posts/store" method="POST" enctype="multipart/form-data">
+              <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                      <label>Username</label>
+                      <input type="text" class="form-control" placeholder="Username" name="username" required data-validation-required-message="Please enter post title.">
+                      <p class="help-block text-danger"></p>
+                    </div>
+              </div>
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
+                  <label>Title</label>
+                  <input type="text" class="form-control" placeholder="Title" name="title" required data-validation-required-message="Please enter post title.">
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
+                  <label>Subtitle</label>
+                  <input type="email" class="form-control" placeholder="Subtitle" name="subtitle" required data-validation-required-message="Please enter post description.">
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
+                  <label>Content</label>
+                  <textarea rows="5" class="form-control" placeholder="Content" name="content" required data-validation-required-message="Please enter post content."></textarea>
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+              <br>
+              <div class="form-group mt-5">
+                <input type="file" name="image" class="form-control-file">
+              </div>
+              
+              <div id="success"></div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary text-center" name="post">Post</button>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+
+
+
+@endsection
