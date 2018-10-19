@@ -50,7 +50,7 @@
               <div class="control-group">
                 <div class="form-group floating-label-form-group controls">
                   <label>Content</label>
-                  <textarea rows="5" class="form-control" placeholder="Content" name="content" required data-validation-required-message="Please enter post content."></textarea>
+                  <textarea rows="5" id="content" class="form-control" placeholder="Content" name="content" required data-validation-required-message="Please enter post content."></textarea>
                   <p class="help-block text-danger"></p>
                 </div>
               </div>
@@ -70,4 +70,15 @@
 
 
 
+@endsection
+
+@section('styles')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+@endsection
+
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+<script>
+  $('#content').summernote();
+</script>
 @endsection
