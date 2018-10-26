@@ -14,14 +14,14 @@ mongoose.connect('mongodb://localhost/node-blog');
 
 app.use(connectFlash());
 
-const mongoStore = connectMongo(expressSession)                             // Persistent session
+const mongoStore = connectMongo(expressSession);
 
 app.use(expressSession({
-    secret : 'Shubham',
+    secret: 'Anish',
     store: new mongoStore({
-        mongooseConnection : mongoose.connection
+        mongooseConnection: mongoose.connection
     })
-}))
+}));
 
 const createPostController = require('./controllers/createPost');
 const homePageController = require('./controllers/homePage');
@@ -36,33 +36,37 @@ const logoutController = require('./controllers/logout');
 app.use(fileUpload());
 app.use(express.static('public'));
 app.use(expressEdge);
-app.set('views' , path.resolve(__dirname , 'views'));
+app.set('views', path.resolve(__dirname, 'views'));
 
-app.use('*' , (req , res , next) => {
-    edge.global('auth' , req.session.userId);
+app.use('*', (req, res, next) => {
+    edge.global('auth', req.session.userId);
     next();
 })
 
-app.use(bodyParser.json());             // for decoding the file send as json format fron browser
-app.use(bodyParser.urlencoded({extended : true}));       // for decoding similar to above combined to have favourable result
+app.use(bodyParser.json()); // for decoding the file send as json format fron browser
+app.use(bodyParser.urlencoded({
+    extended: true
+})); // for decoding similar to above combined to have favourable result
 
 const storePost = require('./middleware/storePost');
 const auth = require('./middleware/auth');
 const redirectIfAuthenticated = require('./middleware/redirectIfAuthenticated');
 
-app.get('/' , homePageController);
-app.get('/post/new' , auth , createPostController);                         //authorize user
-app.post('/posts/store' , auth , storePost , storePostController);          // validate post
-app.get('/post/:id' , getPostController);
-app.get('/auth/logout' , auth , logoutController);
-app.get('/auth/login' , redirectIfAuthenticated, loginController);
-app.post('/users/login' , redirectIfAuthenticated, loginUserController);
-app.get('/auth/register' , redirectIfAuthenticated, createUserController);
+app.get('/', homePageController);
+app.get('/post/new', auth, createPostController); //authorize user
+app.post('/posts/store', auth, storePost, storePostController); // validate post
+app.get('/post/:id', getPostController);
+app.get('/auth/logout', auth, logoutController);
+app.get('/auth/login', redirectIfAuthenticated, loginController);
+app.post('/users/login', redirectIfAuthenticated, loginUserController);
+app.get('/auth/register', redirectIfAuthenticated, createUserController);
 app.post('/users/register', redirectIfAuthenticated, storeUserController);
 
-app.use((req , res) => {res.render('not-found')});
+app.use((req, res) => {
+    res.render('not-found')
+});
 
 
-app.listen(4000,()=>{
+app.listen(4000, () => {
     console.log('The App Listening On Port 4000');
 })
